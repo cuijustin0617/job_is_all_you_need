@@ -1,0 +1,57 @@
+About the job
+
+
+Location: Toronto, Canada (remote) 
+
+Job Type: Internship 
+
+
+
+
+
+Pre-Requisite: The candidate must be a current student studying in a Canadian University 
+
+
+
+About Digy4 
+
+At Digy4, we are dedicated to pushing the boundaries of digital transformation by creating scalable, high-performance SaaS solutions that empower businesses to solve real customer problems. Our team thrives on collaboration, innovation, and a shared commitment to delivering top-tier SaaS based software products. We're looking for a talented and motivated computer science student with strong foundation in machine learning, NLP and software development to join us in developing applications, leveraging machine learning models augmented with large language models (LLMs) for practical, scalable applications in cloud-based infrastructure. 
+
+
+
+Role Overview 
+
+As a Machine Learning Developer at Digy4, you will work to build both machine learning and LLM, developing robust APIs, services, and user interfaces. You will be expected to design, build, train, publish and maintain machine learning models, experiment with different models and also build RAG based solutions using LLMs. 
+
+
+
+Key Responsibilities 
+
+Design, build, train and publish machine learning models. 
+Collaborate on developing retrieval-augmented generation (RAG) based LLM / AI Agent solutions to enhance accuracy and relevance of the results 
+Design, develop, and scalable and secure APIs using Node.js and Java 
+Work with AWS services 
+Python in ML modelling (build, train, deploy) and Programming Skills 
+Implement RESTful APIs and handle integrations between services / ML inference APIs 
+Write unit and integration tests to ensure code quality and reliability. 
+Ensure compliance with security and data protection standards. 
+Collaborate with the product team to understand requirements and turn them into functional code. 
+Troubleshoot and debug applications, ensuring seamless functionality across different environments. 
+
+
+Required Skills & Qualifications 
+
+
+
+Currently Pursuing a Degree: Post-secondary education or program. 
+Programming Skills: Proficient in Java or Js, with exposure to ML libraries. Familiarity with basic knowledge of JavaScript is a plus. 
+
+
+
+
+Understanding of Machine Learning and NLP: Knowledge of machine learning fundamentals and exposure to NLP concepts, including language model architectures (GPT, BERT, etc.). 
+LLMs and RAG Concepts: Familiarity with large language models and retrieval-augmented generation, such as fine-tuning models and using embeddings for information retrieval. 
+Data Management Skills: Comfortable with tools like Pandas, NumPy, and ElasticSearch to manage and manipulate large datasets. 
+Collaboration and Communication: Strong team player with excellent communication skills and a passion for innovation and learning. 
+Understanding of software development best practices, including design patterns, testing, and automation. 
+Strong problem-solving and debugging skills. 

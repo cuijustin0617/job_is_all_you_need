@@ -1,0 +1,230 @@
+\documentclass[11pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot,
+    top=0.5cm, % Reduced top margin
+    bottom=0.2cm, % Reduced bottom margin
+    left=1.6cm,
+    right=1.6cm,
+    footskip=1.0cm,
+]{geometry}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{primaryColor}{RGB}{0, 0, 0}
+\definecolor{royalblue}{RGB}{65, 65, 185}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{amsmath}
+\usepackage[
+    pdftitle={Justin Cui's Resume},
+    pdfauthor={Justin Cui},
+    pdfcreator={LaTeX},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref}
+\usepackage{eso-pic}
+\usepackage{calc}
+\usepackage{bookmark}
+\usepackage{lastpage}
+\usepackage{changepage}
+\usepackage{paracol}
+\usepackage{ifthen}
+\usepackage{needspace}
+\usepackage{iftex}
+
+% Ensure that generated PDF is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{palatino} % Use Palatino font for a more professional look
+\fi
+
+% Some settings:
+\justifying % Justify text alignment
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\columnsep}{0.15cm}
+\pagenumbering{gobble}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    0pt
+}{
+    0.25 cm % Adjusted section spacing for better balance
+}{
+    0.15 cm
+}
+
+% Improved Bullet Point Style
+\renewcommand\labelitemi{\textendash} % Use en dash for bullet points
+
+% Improved Highlights Environment with Indentation
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.08 cm,
+        parsep=0.08 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 17pt % Slight indentation
+    ]
+}
+{
+    \end{itemize}
+}
+\newenvironment{highlights2}{
+    \begin{itemize}[
+        topsep=0.08 cm,
+        parsep=0.08 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 10pt % Slight indentation
+    ]
+}
+{
+    \end{itemize}
+}
+
+\newenvironment{subhighlights}{
+    \begin{itemize}[
+        topsep=0pt,
+        parsep=0.05 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 5pt % Align with main bullet points
+    ]
+}{
+    \end{itemize}
+}
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+}
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+}
+
+% Improved Contact Info Layout
+\newcommand{\contactinfo}{
+    \centering
+    {\fontsize{25pt}{25pt}\selectfont Justin Cui} \\[4pt]
+    \vspace{0.3cm}
+    \small Toronto, ON, CA \hfill 
+    \href{mailto:justin.cui@mail.utoronto.ca}{justin.cui@mail.utoronto.ca} \hfill 
+    \href{tel:+1-416-827-9628}{+1 416 827 9628} \hfill 
+    \href{https://www.linkedin.com/in/justin-cui-b7b654181/}{linkedin.com/in/Justin-Cui} \\
+}
+
+\begin{document}
+
+\contactinfo % Displays optimized contact info in a single line
+\vspace{2pt}
+
+\section{Education}
+\vspace{0.08 cm}
+\begin{twocolentry}{09/2021 - 05/2026}
+    {\textbf{University of Toronto}}, Bachelor of Applied Science  
+\end{twocolentry}
+\vspace{0.11cm}
+\begin{onecolentry}
+\hspace{0.3cm}\textbf{Engineering Science - Machine Intelligence},  cGPA: {\textbf{3.94}}/4.00
+\vspace{0.07cm}
+    \begin{highlights}
+        \item Relevant Courses: Data Structures \& Algorithms, Probability and Statistics, Reinforcement Learning, Digital and Computer Systems, Introduction to Machine Learning, Matrix Algebra and Optimization, Probabilistic Reasoning, Software and Neural Networks, Introduction to Databases.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Publications}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+    \item \textbf{Retrieval-Augmented Conversational Recommendation with Prompt-Based Semi-Structured Natural Language State Tracking} \\
+    First-author, \textit{ACM SIGIR}, 2024. 
+    \vspace{0.1cm}
+    \item \textbf{Elaborative Subtopic Query Reformulation for Query-Driven Recommendation} \\
+    Co-author, \textit{ACM SIGIR}, 2025 (under review).
+    \end{highlights}
+\end{onecolentry}
+
+
+\section{Experience}
+\vspace{0.08 cm}
+\begin{twocolentry}{May 2024 - Present}
+    {\textbf{Machine Learning Engineer Intern}}, Modiface -- Toronto, CA
+\end{twocolentry}
+\vspace{0.05 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Designed and implemented a \textbf{stable diffusion} pipeline for 3D facial dataset augmentation, processing 25M synthetic images and improving \textbf{facial landmark} prediction \textbf{accuracy by 17\%}.
+        \item Developed an auto-converter from \textbf{PyTorch} to \textbf{TensorFlow} for in-house \textbf{computer vision} models.
+        \item Optimized GenAI inference latency by \textbf{40\%+} via \textbf{OpenVINO} integration for \textbf{GAN/diffusion} models.
+        \item Implemented parameter-efficient \textbf{fine-tuning} workflows using \textbf{LoRA adapters} for make-up extraction models.
+        \item Architected an end-to-end \textbf{fine-tuning} pipeline for \textbf{conversational AI} systems, replacing in-context learning with supervised fine-tuning on 5k+ curated dialogue pairs.
+        \item Redesigned skin diagnosis ML pipeline using \textbf{Object Oriented Programming} design, improving robustness.
+    \end{highlights}
+\end{onecolentry}
+\vspace{0.35 cm}
+
+\begin{twocolentry}{April 2023 - Present}
+    {\textbf{Machine Learning Researcher}}, Data-Driven Decision Making Lab (UofT) -- Toronto, CA  
+\end{twocolentry}  
+\vspace{0.1cm}
+\begin{onecolentry}  
+        \hspace{0.3cm}\textbf{Retrieval-Augmented Conversational Recommendation System (SIGIR 2024, 1st Author)}  
+        \begin{highlights} 
+            \item Developed one of the first open source \textbf{RAG-based conversational recommendation system} powered by GPT-4 for natural language recommendation.
+            \item Implemented \textbf{two-tower dense retrieval} with \textbf{FAISS vector database} , indexing 5M+ item embeddings for real-time similarity search.
+            \item Designed system architecture using \textbf{OOP principles }with\textbf{ Python}, integrating LLM orchestration.  
+            \item Published work at \textbf{SIGIR 2024}; presented system demo to \textbf{Meta}’s Conversational AI team (20+ engineers).  
+        \end{highlights}   
+        \hspace{0.3cm}\textbf{Query Reformulation for Query-Driven Recommendation (SIGIR 2025, Co-Author)}  
+        \begin{highlights}  
+            \item Invented a \textbf{query reformulation (QR)} method that combines existing approaches of breadth expansion and depth elaboration, resulting in much more complete and precise retrieval of documents.
+            \item Curated 3 domain-specific datasets (hotels, restaurants, travel) synthetically with \textbf{LLMs}, with systematically labeled query-document relevance labels.  
+            \item Benchmarked against existing QR approaches, improving \textbf{MAP@10, MAP@30 }by\textbf{ >15\%} over baseline models.   
+        \end{highlights}  
+\end{onecolentry}  
+
+\section{Awards}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item \textbf{The Wallberg Undergraduate Scholarships} x2 (2022, 2024) -- Awarded to undergraduates with highest averages.
+        \item \textbf{Undergraduate Student Research Awards} (2023) -- NSERC Canada.
+        \item \textbf{Fujino/Smith Emergence Scholarships} (2022) -- Awarded to first-year undergraduates with highest averages.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Skills}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item \textbf{Programming:} \textbf{Python}, C, MATLAB, \textbf{OOP}, Git, SQL
+        \item \textbf{Technology:} \textbf{PyTorch}, \textbf{TensorFlow}, Numpy, Bash/Linux, GCP, OpenCV, sk-learn, Pandas, PostgresSQL
+        \item \textbf{Languages:} English (Native/Bilingual Proficiency), Mandarin (Native/Bilingual Proficiency), German (Limited Work Proficiency).
+    \end{highlights}
+\end{onecolentry}
+
+\end{document}
