@@ -1,5 +1,5 @@
 import os
-from utils.latex import latex_to_pdf
+from latex import latex_to_pdf
 
 def test_latex_conversion():
     # Create a simple LaTeX document

@@ -31,10 +31,12 @@ class LLMResumeParser:
         - EACH job/role should be a separate block
         - EACH project should be a separate block
         - EACH publication should be a separate block
+        - Entire contact information section should be a single block
         - Entire Education section can be a single block
         - Entire Skills section can be a single block
 
         Each block MUST have a block_type key as one of the following:
+        - "contact information" (for name, personal and contact information section)
         - "work experience" (for individual jobs/roles)
         - "skills" (for skills section)
         - "education" (for education section)
@@ -46,7 +48,16 @@ class LLMResumeParser:
         Return ONLY a valid JSON object with this structure:
         {{
             "block_1": {{
-                "block_type": "work experience",
+                "block_type": "contact information",
+                ... own structure that matches the original contact information entry
+            }},
+            "block_2": {{
+                "block_type": "education",
+                ... own structure that matches the original project entry
+                // If multiple degrees, include a nested structure for each degree
+            }},
+            "block_3": {{
+                "block_type": "work experience", 
                 "title": "Job Title",
                 "company": "Company Name",
                 "location": "Location",
@@ -56,9 +67,9 @@ class LLMResumeParser:
                     "Bullet point 2 (in plain text, NO bolding or formatting)"
                 ]
             }},
-            "block_2": {{
+            "block_4": {{
                 "block_type": "work experience",
-                "title": "Different Job Title",
+                "title": "Different Job Title", 
                 "company": "Different Company Name",
                 "location": "Location",
                 "duration": "Start – End",
@@ -67,40 +78,38 @@ class LLMResumeParser:
                     "Bullet point 2 (in plain text, NO bolding or formatting)"
                 ]
             }},
-            "block_3": {{
+            "block_5": {{
                 "block_type": "skills",
                 "Category1": ["Skill1", "Skill2"],
                 "Category2": ["Skill3", "Skill4"]
                 // If no categories, use "Skills" as the only category key
             }},
-            "block_4": {{
-                "block_type": "education",
-                ... own structure that matches the original project entry
-                // If multiple degrees, include a nested structure for each degree
-            }},
-            "block_5": {{
-                "block_type": "project",
-                ... own structure that matches the original first project entry
-            }},
             "block_6": {{
                 "block_type": "project",
-                ... own structure that matches the original second project entry
+                "title": "Project Title",
+                ... own structure that matches the original first project entry
             }},
             "block_7": {{
-                "block_type": "publication",
-                ... own structure that matches the original first publication entry
+                "block_type": "project",
+                "title": "Project Title",
+                ... own structure that matches the original second project entry
             }},
             "block_8": {{
                 "block_type": "publication",
-                ... own structure that matches the original second publication entry
+                "title": "Publication Title",
+                ... own structure that matches the original first publication entry
             }},
             "block_9": {{
+                "block_type": "publication",
+                "title": "Publication Title",
+                ... own structure that matches the original second publication entry
+            }},
+            "block_10": {{
                 "block_type": "professional summary",
                 ... own structure that matches the original professional summary entry
             }},
             "total_blocks": "number of blocks in the resume"
         }}
-        
         Important:
         - EACH INDIVIDUAL job, INDIVIDUAL project, INDIVIDUAL publication, should have its own numbered block -- even if they are grouped together in one section in the resume
             - for example, any project with its own title, description, etc. should have its own block

@@ -1,0 +1,231 @@
+\documentclass[11pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot,
+    top=0.5cm,
+    bottom=0.2cm,
+    left=1.6cm,
+    right=1.6cm,
+    footskip=1.0cm,
+]{geometry}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{primaryColor}{RGB}{0, 0, 0}
+\definecolor{royalblue}{RGB}{65, 65, 185}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{amsmath}
+\usepackage[
+    pdftitle={Template Resume},
+    pdfauthor={Firstname Lastname},
+    pdfcreator={LaTeX},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref}
+\usepackage{eso-pic}
+\usepackage{calc}
+\usepackage{bookmark}
+\usepackage{lastpage}
+\usepackage{changepage}
+\usepackage{paracol}
+\usepackage{ifthen}
+\usepackage{needspace}
+\usepackage{iftex}
+
+% Ensure that generated PDF is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{palatino}
+\fi
+
+% Some settings:
+\justifying
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\columnsep}{0.15cm}
+\pagenumbering{gobble}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    0pt
+}{
+    0.25 cm
+}{
+    0.15 cm
+}
+
+\renewcommand\labelitemi{\textendash}
+
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.08 cm,
+        parsep=0.08 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 17pt
+    ]
+}
+{
+    \end{itemize}
+}
+\newenvironment{highlights2}{
+    \begin{itemize}[
+        topsep=0.08 cm,
+        parsep=0.08 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 10pt
+    ]
+}
+{
+    \end{itemize}
+}
+
+\newenvironment{subhighlights}{
+    \begin{itemize}[
+        topsep=0pt,
+        parsep=0.05 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 5pt
+    ]
+}{
+    \end{itemize}
+}
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+}
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+}
+
+\newcommand{\contactinfo}{
+    \centering
+    {\fontsize{25pt}{25pt}\selectfont Firstname Lastname} \\[4pt]
+    \vspace{0.3cm}
+    \small City, Province, Country \hfill 
+    \href{mailto:email@example.com}{email@example.com} \hfill 
+    \href{tel:+1-000-000-0000}{+1 000 000 0000} \hfill 
+    \href{https://www.linkedin.com/in/username}{linkedin.com/in/username} \\
+}
+
+\begin{document}
+
+\contactinfo
+\vspace{2pt}
+
+\section{Education}
+\vspace{0.08 cm}
+\begin{twocolentry}{09/2019 - 06/2024}
+    {\textbf{University Name}}, Degree Program
+\end{twocolentry}
+\vspace{0.11cm}
+\begin{onecolentry}
+\hspace{0.3cm}\textbf{Major - Concentration},  cGPA: {\textbf{X.XX}}/4.00
+\vspace{0.07cm}
+    \begin{highlights}
+        \item Relevant Courses: Course A, Course B, Course C, Course D, Course E, Course F, Course G, Course H, Course I, Course A, Course B, Course C, Course D, Course E, Course F, Course G, Course H, Course I..
+    \end{highlights}
+\end{onecolentry}
+
+\section{Publications}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+    \item \textbf{Title of First Publication} \\
+    First-author, \textit{Conference Name}, Year. 
+    \vspace{0.1cm}
+    \item \textbf{Title of Second Publication} \\
+    Co-author, \textit{Conference Name}, Year (under review).
+    \end{highlights}
+\end{onecolentry}
+
+\section{Experience}
+\vspace{0.08 cm}
+\begin{twocolentry}{Jan 2023 - Present}
+    {\textbf{Position Title}}, Company Name -- City, Country
+\end{twocolentry}
+\vspace{0.05 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Abcdefg hijklmn opqrst uvwxyz abcdef ghijklmn opqrstuv wxyz abcdefgh ijklmno.
+        \item Abcdef ghijklmn opqrstuv wxyzabc defghijk lmnopqrs tuvwxyz abcdefgh ijklm.
+        \item Abcdefgh ijklmnop qrstuvwx yzabcde fghijklm nopqrstu vwxyzabc defghijk.
+        \item Abcdefghi jklmnopqr stuvwxyz abcdefgh ijklmnop qrstuvwx yzabcdef ghijklm.
+        \item Abcdefghij klmnopqrs tuvwxyz abcdefgh ijklmnop qrstuvwx yzabcdefg hijklmn.
+        \item Abcdefghijk lmnopqrst uvwxyzab cdefghij klmnopqr stuvwxyz abcdefghi jklmnop.
+        \item Abcdefghijkl mnopqrstu vwxyzabc defghijk lmnopqrs tuvwxyz abcdefghij klmnopq.
+        \item Abcdefghijklm nopqrstuv wxyzabcd efghijkl mnopqrst uvwxyz abcdefghijk lmnopqr.
+        \item Abcdefghijklmn opqrstuvw xyzabcde fghijklm nopqrstu vwxyz abcdefghijkl mnopqrs.
+        \item Abcdefghijklmno pqrstuvwx yzabcdef ghijklmn opqrstuv wxyz abcdefghijklm nopqrst.
+    \end{highlights}
+\end{onecolentry}
+\vspace{0.35 cm}
+
+\begin{twocolentry}{Aug 2022 - Jan 2023}
+    {\textbf{Position Title}}, Lab or Organization -- City, Country  
+\end{twocolentry}  
+\vspace{0.1cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Abcdefg hijklmn opqrst uvwxyz abcdef ghijklmn opqrstuv wxyz abcdefgh ijklmno.
+        \item Abcdef ghijklmn opqrstuv wxyzabc defghijk lmnopqrs tuvwxyz abcdefgh ijklm.
+        \item Abcdefgh ijklmnop qrstuvwx yzabcde fghijklm nopqrstu vwxyzabc defghijk.
+        \item Abcdefghi jklmnopqr stuvwxyz abcdefgh ijklmnop qrstuvwx yzabcdef ghijklm.
+        \item Abcdefghij klmnopqrs tuvwxyz abcdefgh ijklmnop qrstuvwx yzabcdefg hijklmn.
+        \item Abcdefghijk lmnopqrst uvwxyzab cdefghij klmnopqr stuvwxyz abcdefghi jklmnop.
+        \item Abcdefghijkl mnopqrstu vwxyzabc defghijk lmnopqrs tuvwxyz abcdefghij klmnopq.
+        \item Abcdefghijklm nopqrstuv wxyzabcd efghijkl mnopqrst uvwxyz abcdefghijk lmnopqr.
+        \item Abcdefghijklmn opqrstuvw xyzabcde fghijklm nopqrstu vwxyz abcdefghijkl mnopqrs.
+        \item Abcdefghijklmno pqrstuvwx yzabcdef ghijklmn opqrstuv wxyz abcdefghijklm nopqrst.
+        \item Abcdefghijk lmnopqrst uvwxyzab cdefghij klmnopqr stuvwxyz abcdefghi jklmnop.
+        \item Abcdefghijkl mnopqrstu vwxyzabc defghijk lmnopqrs tuvwxyz abcdefghij klmnopq.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Awards}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item \textbf{Xyzzyx Award} x3 (2020, 2021, 2022) -- Klmnop qrstuvw abcdefg hijklmn.
+        \item \textbf{Abcdef Prize} (2023) -- Opqrstu vwxyzab cdefghi jklmnop.
+        \item \textbf{Nopqrs Medal} (2021) -- Tuvwxyz abcdefg hijklmn opqrstu.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Skills}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item \textbf{Programming:} xyzzyx, abcdef, klmnop, qrstuv, wxyzab, cdefgh
+        \item \textbf{Technology:} ijklmn, opqrst, uvwxyz, abcdef, ghijkl, mnopqr, stuvwx, yzabcd
+        \item \textbf{Languages:} Xyzzyx (Native), Abcdef (Fluent), Klmnop (Intermediate).
+    \end{highlights}
+\end{onecolentry}
+
+\end{document}

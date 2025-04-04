@@ -1,0 +1,36 @@
+{
+  "must_include": [
+    "block_2",
+    "block_3"
+  ],
+  "ranked_list": [
+    {
+      "block_id": "block_9",
+      "rank": 1
+    },
+    {
+      "block_id": "block_4",
+      "rank": 2
+    },
+    {
+      "block_id": "block_5",
+      "rank": 3
+    },
+    {
+      "block_id": "block_6",
+      "rank": 4
+    },
+    {
+      "block_id": "block_7",
+      "rank": 5
+    },
+    {
+      "block_id": "block_8",
+      "rank": 6
+    },
+    {
+      "block_id": "block_11",
+      "rank": 7
+    }
+  ]
+}

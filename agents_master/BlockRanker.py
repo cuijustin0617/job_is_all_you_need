@@ -31,7 +31,7 @@ class BlockRanker:
     
     def filter_blocks(self, parsed_resume):
         """
-        Filter resume blocks to exclude education, professional summary, and skills.
+        Filter resume blocks to exclude education, professional summary, and skills, contact information.
         
         Args:
             parsed_resume (dict): The parsed resume from ResumeParser
@@ -39,7 +39,7 @@ class BlockRanker:
         Returns:
             dict: Dictionary containing only the blocks to be ranked
         """
-        excluded_types = ["education", "professional summary", "skills"]
+        excluded_types = ["education", "professional summary", "skills", "contact information"]
         filtered_blocks = {}
         
         for block_id, block_data in parsed_resume.items():
@@ -145,6 +145,111 @@ class BlockRanker:
                 "error": "Failed to parse ranking response",
                 "raw_response": response_text
             }
+
+    def determine_inclusion_threshold(self, ranking_result, parsed_resume):
+        """
+        Determine a threshold cutoff for blocks to include in a one-page resume.
+        
+        Args:
+            ranking_result (dict): Dict with "must_include" and "ranked_list" from rank_resume_blocks
+            parsed_resume (dict): The parsed resume from ResumeParser
+            
+        Returns:
+            dict: Enhanced ranking with threshold information
+        """
+        # Enhance ranked list with descriptive information
+        enhanced_ranked_list = []
+        for item in ranking_result["ranked_list"]:
+            block_id = item["block_id"]
+            block_data = parsed_resume[block_id]
+            
+            # Extract description based on block type
+            description = ""
+            if block_data["block_type"].lower() == "work experience":
+                description = f"Experience: {block_data.get('company', '')} - {block_data.get('title', '')}"
+            elif block_data["block_type"].lower() == "project":
+                description = f"Project: {block_data.get('title', '')}"
+            elif block_data["block_type"].lower() == "publication":
+                description = f"Publication: {block_data.get('title', '')}"
+            else:
+                description = f"{block_data['block_type']}: {block_data.get('name', '')}"
+            
+            enhanced_ranked_list.append({
+                "block_id": block_id,
+                "rank": item["rank"],
+                "description": description,
+                "type": block_data["block_type"].lower()
+            })
+        
+        # Get must-include blocks with descriptions
+        must_include_blocks = []
+        for block_id in ranking_result["must_include"]:
+            block_data = parsed_resume[block_id]
+            
+            # Extract description based on block type
+            description = ""
+            if block_data["block_type"].lower() == "experience":
+                description = f"Experience: {block_data.get('company', '')} - {block_data.get('title', '')}"
+            elif block_data["block_type"].lower() == "project":
+                description = f"Project: {block_data.get('name', '')}"
+            elif block_data["block_type"].lower() == "publication":
+                description = f"Publication: {block_data.get('title', '')}"
+            else:
+                description = f"{block_data['block_type']}: {block_data.get('name', '')}"
+            
+            must_include_blocks.append({
+                "block_id": block_id,
+                "description": description,
+                "type": block_data["block_type"].lower()
+            })
+        
+        # Create prompt for threshold determination
+        prompt = f"""
+        You are a resume optimization expert. Your task is to determine which blocks to include in a one-page resume.
+        
+        MUST INCLUDE BLOCKS (non-negotiable):
+        {json.dumps(must_include_blocks, indent=2)}
+        
+        RANKED BLOCKS (in order of importance):
+        {json.dumps(enhanced_ranked_list, indent=2)}
+        
+        GUIDELINES:
+        - A one-page resume typically has limited space
+        - Experience sections usually take 6-8 lines each
+        - Project sections usually take 3-4 lines each
+        - Publication sections usually take 2-3 lines each
+        - Education and skills sections (not in the ranked list) will also occupy space
+        - The goal is to include as many relevant blocks as possible while keeping to one page
+        
+        Determine a rank threshold (1-{len(enhanced_ranked_list)}) from the ranked list. All blocks with rank less than or equal to this threshold should be included.
+        
+        Return ONLY the rank as a number, nothing else.
+        """
+        
+        # Get the response
+        response = self.client.models.generate_content(
+            model=self.model_name, contents=prompt
+        )
+        
+        # Extract the threshold value
+        try:
+            threshold = int(response.text.strip())
+        except ValueError:
+            # If response isn't a clean integer, try to extract it
+            import re
+            match = re.search(r'\b(\d+)\b', response.text)
+            if match:
+                threshold = int(match.group(1))
+            else:
+                # Default threshold if extraction fails
+                threshold = 2
+        
+        # Add threshold to the result
+        enhanced_result = ranking_result.copy()
+        enhanced_result["threshold"] = threshold
+        enhanced_result["enhanced_ranked_list"] = enhanced_ranked_list
+        
+        return enhanced_result
 
 if __name__ == "__main__":
     api_key = "AIzaSyD3fnGbKojcbSYiD2eKJQvum0oF4N5iWlA"
