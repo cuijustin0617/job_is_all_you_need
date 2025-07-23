@@ -39,33 +39,37 @@ class ResumeBuilder:
         
         return latex_code
     
-    def build_resume_pdf(self, parsed_resume, template, ranking_result, output_file="tailored_resume", use_gold_standard=False):
+    def build_resume_pdf(self, parsed_resume, template, threshold_result, output_path, use_gold_standard=False):
         """
-        Build a one-page resume from the parsed resume and convert it to PDF.
+        Main method to build a one-page resume PDF from the parsed resume, using the provided ranking.
         
         Args:
             parsed_resume (dict): The parsed resume from ResumeParser
-            template (str): Either the original LaTeX code from the master resume 
-                           or a gold standard template if use_gold_standard is True
-            ranking_result (dict): Result from BlockRanker with threshold
-            output_file (str): Base name for the output files (without extension)
-            use_gold_standard (bool): Whether to use the gold standard template instead of original LaTeX
+            template (str): The LaTeX template to use
+            threshold_result (dict): Result from BlockRanker's determine_inclusion_threshold
+            output_path (str): Path to save the generated LaTeX and PDF files
+            use_gold_standard (bool): Whether to use a gold standard template
             
         Returns:
-            tuple: (latex_path, pdf_path) paths to the generated LaTeX and PDF files
+            tuple: (latex_file_path, pdf_file_path)
         """
+        # Filter the resume based on the threshold
+        filtered_resume = self._filter_resume_by_threshold(parsed_resume, threshold_result)
+        
         # Generate LaTeX code
-        latex_code = self.build_resume(parsed_resume, template, ranking_result, use_gold_standard)
+        generate_result = self._generate_latex(filtered_resume, template, use_gold_standard)
+        latex_code = generate_result["latex"]
         
-        # Save LaTeX to file
-        latex_path = f"{output_file}.tex"
-        with open(latex_path, "w") as file:
+        # Write LaTeX to file
+        latex_file_path = f"{output_path}.tex"
+        with open(latex_file_path, "w") as file:
             file.write(latex_code)
-        
+            
         # Convert to PDF
-        pdf_path = self.latex_to_pdf(latex_code, f"{output_file}.pdf")
+        pdf_file_path = f"{output_path}.pdf"
+        pdf_path = self.latex_to_pdf(latex_code, pdf_file_path)
         
-        return latex_path, pdf_path
+        return latex_file_path, pdf_path
     
     def latex_to_pdf(self, latex_content: str, output_path: str = None) -> str:
         """
@@ -183,50 +187,39 @@ class ResumeBuilder:
                 print(f"Traceback: {traceback.format_exc()}")
                 raise RuntimeError(f"Failed to convert LaTeX to PDF: {str(e)}")
     
-    def _filter_resume_by_threshold(self, parsed_resume, ranking_result):
+    def _filter_resume_by_threshold(self, parsed_resume, threshold_result):
         """
-        Filter the parsed resume to only include blocks that must be included
-        and blocks within the threshold rank.
+        Filter the parsed resume to include only blocks that meet the threshold criteria.
         
         Args:
-            parsed_resume (dict): The parsed resume from ResumeParser
-            ranking_result (dict): Result from BlockRanker with threshold
+            parsed_resume (dict): The full parsed resume
+            threshold_result (dict): Result from BlockRanker's determine_inclusion_threshold
             
         Returns:
-            dict: Filtered parsed resume
+            dict: Filtered resume with only the blocks to include
         """
-        threshold = ranking_result.get("threshold", 2)
-        must_include = set(ranking_result.get("must_include", []))
+        # Get the blocks to include
+        blocks_to_include = threshold_result.get("must_include", []).copy()
         
-        # Find blocks to include based on threshold
-        blocks_to_include = must_include.copy()
+        # Add blocks within threshold
+        threshold = threshold_result.get("threshold", 0)
+        ranked_list = threshold_result.get("enhanced_ranked_list", [])
         
-        # Add blocks from ranked list up to threshold
-        for item in ranking_result.get("ranked_list", []):
-            if item["rank"] <= threshold:
-                blocks_to_include.add(item["block_id"])
+        for i, block in enumerate(ranked_list):
+            if i < threshold:
+                blocks_to_include.append(block["block_id"])
         
-        # Filter the parsed resume
+        # Filter the resume
         filtered_resume = {
-            "total_blocks": len(blocks_to_include)
+            key: value for key, value in parsed_resume.items() 
+            if key == "total_blocks" or key in blocks_to_include
         }
         
-        # Add blocks to the filtered resume
+        # Ensure other necessary blocks (contact, education, skills) are included
         for block_id, block_data in parsed_resume.items():
-            if block_id == "total_blocks":
-                continue
-                
-            if block_id in blocks_to_include:
-                filtered_resume[block_id] = block_data
-                
-        # Add always-included sections like education and skills if they exist
-        for block_id, block_data in parsed_resume.items():
-            if block_id == "total_blocks":
-                continue
-                
-            if "block_type" in block_data:
+            if block_id != "total_blocks" and "block_type" in block_data:
                 block_type = block_data["block_type"].lower()
-                if block_type in ["education", "skills", "professional summary"]:
+                if block_type in ["contact information", "education", "skills", "professional summary"]:
                     filtered_resume[block_id] = block_data
         
         return filtered_resume
@@ -242,7 +235,7 @@ class ResumeBuilder:
             use_gold_standard (bool): Whether the template is a gold standard template
             
         Returns:
-            str: LaTeX code for the one-page resume
+            dict: Dictionary with the generated LaTeX code and the prompt used
         """
         prompt = self._create_latex_prompt(filtered_resume, template, use_gold_standard)
         
@@ -252,7 +245,7 @@ class ResumeBuilder:
         
         # Extract the LaTeX code
         latex_code = self._extract_latex_code(response.text)
-        return latex_code
+        return {"latex": latex_code, "prompt": prompt}
     
     def _create_latex_prompt(self, filtered_resume, template, use_gold_standard=False):
         """
@@ -266,7 +259,7 @@ class ResumeBuilder:
         Returns:
             str: Prompt for the LLM
         """
-        template_description = "gold standard" if use_gold_standard else "original"
+        template_description = "gold standard one page resume" if use_gold_standard else "original master resume"
         
         prompt = f"""
         You are an expert LaTeX resume builder. Your task is to generate a one-page resume using:
@@ -280,7 +273,7 @@ class ResumeBuilder:
         ```
         
         INSTRUCTIONS:
-        - Create a complete, compilable LaTeX document
+        - Create a ONE PAGE, complete, compilable LaTeX document
         - Use ONLY the information included in the parsed resume data
         - IMPORTANT: Replace the placeholder contact information in the template with the actual contact information(name, location, email, phone, linkedin..) from parsed resume, while maintaining the same formatting style. the name is usually in the author field on latex template.
         - Maintain the exact same structure, formatting, fonts, margins, and style as the template
@@ -347,99 +340,3 @@ class ResumeBuilder:
             template (str): The LaTeX code of the gold standard template
         """
         self.gold_standard_template = template
-
-
-if __name__ == "__main__":
-    api_key = "AIzaSyD3fnGbKojcbSYiD2eKJQvum0oF4N5iWlA"
-    
-    # Create and clean intermediate_dev folder for logging intermediate results
-    intermediate_dir = "intermediate_dev"
-    if os.path.exists(intermediate_dir):
-        shutil.rmtree(intermediate_dir)  # Clear existing directory
-    os.makedirs(intermediate_dir, exist_ok=True)
-    
-    # Create results folder for final outputs
-    results_dir = "results"
-    if not os.path.exists(results_dir):
-        os.makedirs(results_dir, exist_ok=True)
-    
-    def save_intermediate(data, filename):
-        """Save intermediate result to file in intermediate_dev folder"""
-        file_path = os.path.join(intermediate_dir, filename)
-        with open(file_path, "w") as f:
-            if isinstance(data, str):
-                f.write(data)
-            else:
-                json.dump(data, f, indent=2)
-        print(f"Saved intermediate result to {file_path}")
-    
-    # Example test
-    from ResumeParser import LLMResumeParser
-    from JobCondenser import JobCondenser
-    from BlockRanker import BlockRanker
-    
-    # Parse resume
-    parser = LLMResumeParser(api_key=api_key)
-    with open("resumes/master_resume.txt", "r") as file:
-        latex_content = file.read()
-    parsed_resume = parser.parse_latex(latex_content)
-    save_intermediate(parsed_resume, "1_parsed_resume.json")
-    
-    # Condense job
-    job_condenser = JobCondenser(api_key=api_key)
-    with open("jobs/llm+rag.txt", "r") as file:
-        job_description = file.read()
-    job_requirements = job_condenser.condense(job_description)
-    save_intermediate(job_requirements, "2_job_requirements.json")
-    
-    # Rank blocks
-    block_ranker = BlockRanker(api_key=api_key)
-    ranking_result = block_ranker.rank_resume_blocks(parsed_resume, job_requirements)
-    save_intermediate(ranking_result, "3_ranking_result.json")
-    threshold_result = block_ranker.determine_inclusion_threshold(ranking_result, parsed_resume)
-    save_intermediate(threshold_result, "4_threshold_result.json")
-    
-    # Build resume and generate PDF using original template
-    resume_builder = ResumeBuilder(api_key=api_key)
-    original_output_path = os.path.join(results_dir, "tailored_resume_original")
-    latex_path, pdf_path = resume_builder.build_resume_pdf(
-        parsed_resume, latex_content, threshold_result, original_output_path
-    )
-    save_intermediate(latex_content, "5a_original_template.tex")
-    
-    # Save the generated LaTeX
-    with open(latex_path, "r") as file:
-        generated_latex = file.read()
-    save_intermediate(generated_latex, "5b_generated_resume_original.tex")
-    
-    if pdf_path:
-        print(f"Tailored resume generated: {latex_path} and PDF: {pdf_path}")
-    else:
-        print(f"Tailored resume generated: {latex_path} but PDF conversion failed.")
-    
-    # Example with gold standard template
-    try:
-        # 1. Load the gold standard template
-        with open("gold_standard_resumes/research_resume.txt", "r") as file:
-            gold_template = file.read()
-        save_intermediate(gold_template, "6a_gold_standard_template.tex")
-            
-        # 2. Build resume using the gold standard template
-        gold_output_path = os.path.join(results_dir, "tailored_resume_gold")
-        gold_latex_path, gold_pdf_path = resume_builder.build_resume_pdf(
-            parsed_resume, gold_template, threshold_result, 
-            gold_output_path, use_gold_standard=True
-        )
-        
-        # Save the generated gold standard LaTeX
-        with open(gold_latex_path, "r") as file:
-            generated_gold_latex = file.read()
-        save_intermediate(generated_gold_latex, "6b_generated_resume_gold.tex")
-        
-        if gold_pdf_path:
-            print(f"Gold standard resume generated: {gold_latex_path} and PDF: {gold_pdf_path}")
-        else:
-            print(f"Gold standard resume generated: {gold_latex_path} but PDF conversion failed.")
-    except FileNotFoundError as e:
-        print(f"Gold standard template not found: {e}. Using original template only.")
-        save_intermediate(f"Error: {str(e)}", "6_gold_standard_error.txt")

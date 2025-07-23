@@ -1,0 +1,24 @@
+
+        You are a resume optimization expert. Your task is to determine which blocks to include in a one-page resume.
+        
+        MUST INCLUDE BLOCKS (non-negotiable):
+        [
+  "block_2",
+  "block_3"
+]
+        
+        RANKED BLOCKS (in order of importance):
+        []
+        
+        GUIDELINES:
+        - A one-page resume typically has limited space
+        - Experience sections usually take 6-8 lines each
+        - Project sections usually take 3-4 lines each
+        - Publication sections usually take 2-3 lines each
+        - Education and skills sections (not in the ranked list) will also occupy space
+        - The goal is to include as many relevant blocks as possible while keeping to one page
+        
+        Determine a rank threshold (1-0) from the ranked list. All blocks with rank less than or equal to this threshold should be included.
+        
+        Return ONLY the rank as a number, nothing else.
+        

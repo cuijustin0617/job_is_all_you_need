@@ -1,0 +1,30 @@
+
+        You are an expert resume formatting assistant. Analyze this 2-page resume and suggest minimal changes
+        to make it fit exactly on one page while maintaining a professional appearance.
+
+        CONTEXT:
+        - This resume needs to be exactly one page.
+        - The least important blocks that are still included in the resume have IDs: ['block_9']
+        - The most important blocks that were excluded from the resume have IDs: ['block_10']
+        
+        PLEASE RECOMMEND:
+        1. If the resume is too long:
+           - Suggest removing the least important block(s) that are still included
+           - Identify specific bullet points that could be removed
+           - Suggest spacing adjustments between sections
+           - Recommend slight font size reductions if appropriate (e.g., from 11pt to 10.5pt)
+           - Suggest margin adjustments if needed
+        
+        2. If the resume is too short (significantly under one page):
+           - Suggest adding the most important block(s) that were excluded
+           - Suggest adding more spacing between sections
+           - Recommend slightly larger font sizes if appropriate
+           - Suggest increasing margins if needed
+        
+        3. If the resume has formatting issues:
+           - Identify and suggest fixes for typos, misalignments, or formatting inconsistencies
+           - Suggest minor font size or font style adjustments if needed
+        
+        Return a clear, structured list of at most 3-5 specific changes to make the resume perfect.
+        IMPORTANT: Do NOT change the actual content information in the bullet points.
+        

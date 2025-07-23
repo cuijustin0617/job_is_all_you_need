@@ -8,6 +8,13 @@ class JobCondenser:
     for targeted resume tailoring.
     """
     def __init__(self, model_name="gemini-2.0-flash", api_key=None):
+        """
+        Initialize the JobCondenser.
+        
+        Args:
+            model_name (str): Name of the Gemini model to use
+            api_key (str): API key for Google AI
+        """
         self.client = genai.Client(api_key=api_key)
         self.model_name = model_name
     
@@ -32,7 +39,7 @@ class JobCondenser:
         try:
             # First try direct JSON parsing
             result = json.loads(response_text)
-            return result
+            return {"result": result, "prompt": prompt}
         except json.JSONDecodeError:
             # If that fails, try to extract JSON from markdown code blocks
             try:
@@ -41,7 +48,7 @@ class JobCondenser:
                 if json_match:
                     json_str = json_match.group(1).strip()
                     result = json.loads(json_str)
-                    return result
+                    return {"result": result, "prompt": prompt}
                 else:
                     return {
                         "error": "Failed to parse structured output",

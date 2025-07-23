@@ -1,0 +1,375 @@
+
+        You are an expert LaTeX resume builder. Your task is to generate a one-page resume using:
+        
+        1. The content from this parsed resume data:
+        {
+  "total_blocks": 5,
+  "block_2": {
+    "block_type": "work experience",
+    "title": "SWE/SDE/MLE/MLops Intern",
+    "company": "Modiface",
+    "location": "Toronto, CA",
+    "duration": "May 2024 - Present",
+    "bullets": [
+      "Engineered a robust data processing pipeline to augment a synthetic 3D-face dataset (25M images) using  stable diffusion with Python and Shell scripting, achieving a 17% improvement in facepoints prediction accuracy.",
+      "Developed a seamless model conversion tool to translate in-house computer vision models from PyTorch to TensorFlow, ensuring consistent cross-platform integration, reducing latency by over 10%.",
+      "Optimized inference performance of generative AI models (including GANs and diffusion-based models) by integrating OpenVINO, reducing latency by over 40% and enhancing scalability.",
+      "Developed a Python-based fine-tuning pipeline integrating existing training conversation pairs and formatting scripts to enhance beuaty chatbot by replacing the in-context learning approach",
+      "Architected end-to-end fine-tuning pipeline for conversational AI systems, replacing in-context learning with supervised fine-tuning on 5k+ curated dialogue pairs",
+      "Refactored skin diagnosis repository using object-oriented design, consolidating recurring patterns into a unified sign registry and score normalization framework, enhancing code maintainability and consistency.",
+      "Finetuned Stable Diffusion LoRA models to improve task-specific GenAI performance, improving accuracy by 40%.",
+      "Refined eyeliner extraction through advanced k-means clustering and adaptive HSV thresholding techniques, boosting accuracy in distinguishing facial makeup regions and optimizing the overall inference pipeline.",
+      "Spearheaded the redesign and development of an internal computer vision model profiling tool's metric panel using TypeScript. This dashboard provided real-time monitoring of key performance indicators such as FPS, memory usage, and track time, enhancing system observability and performance tuning."
+    ]
+  },
+  "block_3": {
+    "block_type": "work experience",
+    "title": "SWE/SDE/MLE/Applied ML/ML Research intern",
+    "company": "Data-Driven Decision Making Lab (UofT)",
+    "location": "Toronto, CA",
+    "duration": "April 2023 - September 2023",
+    "bullets": [
+      "Designed and implemented a RAG-based chatbot system leveraging LLM APIs for dynamic natural language interactions and personalized responses.",
+      "Architected the application using object-oriented design patterns, creating a modular system with 10+ interchangeable components for different NLP workflows.",
+      "Developed core infrastructure in Python with 5+ API integrations, implementing rate limiting and caching mechanisms to handle 500+ RPM.",
+      "Built a custom data pipeline using FAISS vector database to process and embed 1M+ product entries for real-time retrieval.",
+      "Conducted comprehensive system testing including unit tests (95% coverage) and integration tests with simulated synthetic users using LLMs.",
+      "Delivered technical demonstrations to 20+ Meta engineers and executives, showcasing system architecture and RAG features.",
+      "Authored detailed documentation including API specs, deployment guides, and maintenance procedures.",
+      "Retrieval-Augmented Conversational Recommendation System (SIGIR 2024, 1st Author): Developed an open source RAG-based conversational recommendation system powered by GPT-4.",
+      "Implemented two-tower dense retrieval with FAISS indexing 5M+ item embeddings for real-time similarity search.",
+      "Designed system architecture using OOP principles in Python, integrating LLM orchestration.",
+      "Published work at SIGIR 2024 and demoed the system to Meta\u2019s engineering leadership.",
+      "Query Reformulation for Query-Driven Recommendation (SIGIR 2025, Co-Author): Invented a query reformulation method that combines breadth expansion and depth elaboration.",
+      "Curated 3 domain-specific datasets (hotels, restaurants, travel) synthetically with LLMs and labeled query-document relevance.",
+      "Benchmarked against existing approaches, improving MAP@10, MAP@30 by over 10%.",
+      "Published findings at SIGIR 2025 with ablation studies on reformulation components."
+    ]
+  },
+  "block_5": {
+    "block_type": "publication",
+    "title": "Retrieval-Augmented Conversational Recommendation with Prompt-Based Semi-Structured Natural Language State Tracking",
+    "details": "First-author, ACM SIGIR, 2024."
+  },
+  "block_6": {
+    "block_type": "publication",
+    "title": "Elaborative Subtopic Query Reformulation for Query-Driven Recommendation",
+    "details": "Co-author, ACM SIGIR, 2025 (under review)."
+  },
+  "block_9": {
+    "block_type": "project",
+    "title": "LLM Powered Resume Modifier for Job Descriptions",
+    "description": "Engineered a multi-agent system using Google's Gemini AI to tailor LaTeX resumes. The system parses resumes, condenses job descriptions, and employs relevance scoring and content selection to optimize work experiences and extras. Integrated a VLM feedback loop for formatting refinement and visual consistency."
+  },
+  "block_10": {
+    "block_type": "education",
+    "university": "University of Toronto",
+    "degree": "Bachelor of Applied Science",
+    "major": "Machine Intelligence",
+    "duration": "09/2021 - 05/2026",
+    "cgpa": "3.94/4.00",
+    "details": [
+      "Relevant Courses: Data Structures & Algorithms, Probability and Statistics, Reinforcement Learning, Digital and Computer Systems, Introduction to Machine Learning, Matrix Algebra and Optimization, Probabilistic Reasoning, Software and Neural Networks, Introduction to Databases."
+    ]
+  },
+  "block_12": {
+    "block_type": "skills",
+    "Programming": [
+      "Python",
+      "C",
+      "MATLAB",
+      "PyTorch",
+      "TensorFlow",
+      "Keras",
+      "scikit-learn",
+      "Hugging Face Transformers",
+      "NumPy",
+      "Pandas",
+      "Matplotlib",
+      "Seaborn",
+      "OOP",
+      "Bash/Linux",
+      "Git",
+      "Docker",
+      "CI/CD",
+      "ML Ops",
+      "GCP",
+      "ONNX",
+      "OpenCV",
+      "Postgres",
+      "mySQL"
+    ],
+    "Languages": [
+      "English (Native/Bilingual Proficiency)",
+      "Mandarin (Native/Bilingual Proficiency)",
+      "German (Limited Work Proficiency)"
+    ]
+  }
+}
+        
+        2. The formatting and style from this gold standard one page resume LaTeX template:
+        ```latex
+        \documentclass[11pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot,
+    top=0.5cm,
+    bottom=0.2cm,
+    left=1.6cm,
+    right=1.6cm,
+    footskip=1.0cm,
+]{geometry}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{primaryColor}{RGB}{0, 0, 0}
+\definecolor{royalblue}{RGB}{65, 65, 185}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{amsmath}
+\usepackage[
+    pdftitle={Template Resume},
+    pdfauthor={Firstname Lastname},
+    pdfcreator={LaTeX},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref}
+\usepackage{eso-pic}
+\usepackage{calc}
+\usepackage{bookmark}
+\usepackage{lastpage}
+\usepackage{changepage}
+\usepackage{paracol}
+\usepackage{ifthen}
+\usepackage{needspace}
+\usepackage{iftex}
+
+% Ensure that generated PDF is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{palatino}
+\fi
+
+% Some settings:
+\justifying
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\columnsep}{0.15cm}
+\pagenumbering{gobble}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    0pt
+}{
+    0.25 cm
+}{
+    0.15 cm
+}
+
+\renewcommand\labelitemi{\textendash}
+
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.08 cm,
+        parsep=0.08 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 17pt
+    ]
+}
+{
+    \end{itemize}
+}
+\newenvironment{highlights2}{
+    \begin{itemize}[
+        topsep=0.08 cm,
+        parsep=0.08 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 10pt
+    ]
+}
+{
+    \end{itemize}
+}
+
+\newenvironment{subhighlights}{
+    \begin{itemize}[
+        topsep=0pt,
+        parsep=0.05 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 5pt
+    ]
+}{
+    \end{itemize}
+}
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+}
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+}
+
+\newcommand{\contactinfo}{
+    \centering
+    {\fontsize{25pt}{25pt}\selectfont Firstname Lastname} \\[4pt]
+    \vspace{0.3cm}
+    \small City, Province, Country \hfill 
+    \href{mailto:email@example.com}{email@example.com} \hfill 
+    \href{tel:+1-000-000-0000}{+1 000 000 0000} \hfill 
+    \href{https://www.linkedin.com/in/username}{linkedin.com/in/username} \\
+}
+
+\begin{document}
+
+\contactinfo
+\vspace{2pt}
+
+\section{Education}
+\vspace{0.08 cm}
+\begin{twocolentry}{09/2019 - 06/2024}
+    {\textbf{University Name}}, Degree Program
+\end{twocolentry}
+\vspace{0.11cm}
+\begin{onecolentry}
+\hspace{0.3cm}\textbf{Major - Concentration},  cGPA: {\textbf{X.XX}}/4.00
+\vspace{0.07cm}
+    \begin{highlights}
+        \item Relevant Courses: Course A, Course B, Course C, Course D, Course E, Course F, Course G, Course H, Course I, Course A, Course B, Course C, Course D, Course E, Course F, Course G, Course H, Course I..
+    \end{highlights}
+\end{onecolentry}
+
+\section{Publications}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+    \item \textbf{Title of First Publication} \\
+    First-author, \textit{Conference Name}, Year. 
+    \vspace{0.1cm}
+    \item \textbf{Title of Second Publication} \\
+    Co-author, \textit{Conference Name}, Year (under review).
+    \end{highlights}
+\end{onecolentry}
+
+\section{Experience}
+\vspace{0.08 cm}
+\begin{twocolentry}{Jan 2023 - Present}
+    {\textbf{Position Title}}, Company Name -- City, Country
+\end{twocolentry}
+\vspace{0.05 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Abcdefg hijklmn opqrst uvwxyz abcdef ghijklmn opqrstuv wxyz abcdefgh ijklmno.
+        \item Abcdef ghijklmn opqrstuv wxyzabc defghijk lmnopqrs tuvwxyz abcdefgh ijklm.
+        \item Abcdefgh ijklmnop qrstuvwx yzabcde fghijklm nopqrstu vwxyzabc defghijk.
+        \item Abcdefghi jklmnopqr stuvwxyz abcdefgh ijklmnop qrstuvwx yzabcdef ghijklm.
+        \item Abcdefghij klmnopqrs tuvwxyz abcdefgh ijklmnop qrstuvwx yzabcdefg hijklmn.
+        \item Abcdefghijk lmnopqrst uvwxyzab cdefghij klmnopqr stuvwxyz abcdefghi jklmnop.
+        \item Abcdefghijkl mnopqrstu vwxyzabc defghijk lmnopqrs tuvwxyz abcdefghij klmnopq.
+        \item Abcdefghijklm nopqrstuv wxyzabcd efghijkl mnopqrst uvwxyz abcdefghijk lmnopqr.
+        \item Abcdefghijklmn opqrstuvw xyzabcde fghijklm nopqrstu vwxyz abcdefghijkl mnopqrs.
+        \item Abcdefghijklmno pqrstuvwx yzabcdef ghijklmn opqrstuv wxyz abcdefghijklm nopqrst.
+    \end{highlights}
+\end{onecolentry}
+\vspace{0.35 cm}
+
+\begin{twocolentry}{Aug 2022 - Jan 2023}
+    {\textbf{Position Title}}, Lab or Organization -- City, Country  
+\end{twocolentry}  
+\vspace{0.1cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Abcdefg hijklmn opqrst uvwxyz abcdef ghijklmn opqrstuv wxyz abcdefgh ijklmno.
+        \item Abcdef ghijklmn opqrstuv wxyzabc defghijk lmnopqrs tuvwxyz abcdefgh ijklm.
+        \item Abcdefgh ijklmnop qrstuvwx yzabcde fghijklm nopqrstu vwxyzabc defghijk.
+        \item Abcdefghi jklmnopqr stuvwxyz abcdefgh ijklmnop qrstuvwx yzabcdef ghijklm.
+        \item Abcdefghij klmnopqrs tuvwxyz abcdefgh ijklmnop qrstuvwx yzabcdefg hijklmn.
+        \item Abcdefghijk lmnopqrst uvwxyzab cdefghij klmnopqr stuvwxyz abcdefghi jklmnop.
+        \item Abcdefghijkl mnopqrstu vwxyzabc defghijk lmnopqrs tuvwxyz abcdefghij klmnopq.
+        \item Abcdefghijklm nopqrstuv wxyzabcd efghijkl mnopqrst uvwxyz abcdefghijk lmnopqr.
+        \item Abcdefghijklmn opqrstuvw xyzabcde fghijklm nopqrstu vwxyz abcdefghijkl mnopqrs.
+        \item Abcdefghijklmno pqrstuvwx yzabcdef ghijklmn opqrstuv wxyz abcdefghijklm nopqrst.
+        \item Abcdefghijk lmnopqrst uvwxyzab cdefghij klmnopqr stuvwxyz abcdefghi jklmnop.
+        \item Abcdefghijkl mnopqrstu vwxyzabc defghijk lmnopqrs tuvwxyz abcdefghij klmnopq.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Awards}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item \textbf{Xyzzyx Award} x3 (2020, 2021, 2022) -- Klmnop qrstuvw abcdefg hijklmn.
+        \item \textbf{Abcdef Prize} (2023) -- Opqrstu vwxyzab cdefghi jklmnop.
+        \item \textbf{Nopqrs Medal} (2021) -- Tuvwxyz abcdefg hijklmn opqrstu.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Skills}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item \textbf{Programming:} xyzzyx, abcdef, klmnop, qrstuv, wxyzab, cdefgh
+        \item \textbf{Technology:} ijklmn, opqrst, uvwxyz, abcdef, ghijkl, mnopqr, stuvwx, yzabcd
+        \item \textbf{Languages:} Xyzzyx (Native), Abcdef (Fluent), Klmnop (Intermediate).
+    \end{highlights}
+\end{onecolentry}
+
+\end{document}
+
+        ```
+        
+        INSTRUCTIONS:
+        - Create a ONE PAGE, complete, compilable LaTeX document
+        - Use ONLY the information included in the parsed resume data
+        - IMPORTANT: Replace the placeholder contact information in the template with the actual contact information(name, location, email, phone, linkedin..) from parsed resume, while maintaining the same formatting style. the name is usually in the author field on latex template.
+        - Maintain the exact same structure, formatting, fonts, margins, and style as the template
+        - Include sections in the same order as the template
+        - If a section type doesn't exist in the filtered data, skip it entirely
+        - Make sure bullet points are properly formatted
+        - Ensure the result is exactly one page (remove content if necessary)
+        - Keep the exact same LaTeX packages and document class
+        
+        
+        BULLET POINT SELECTION GUIDELINES:
+        - For each experience section, select only the most relevant and impactful bullet points
+        - The number of bullet points should match the importance and length of the experience, but also consider the remaining space on the page:
+          * For primary/recent/important experiences: 4-8 bullet points
+          * For secondary experiences: 3-5 bullet points
+          * For minor/older experiences: 1-3 bullet points
+        - For project sections: 2-4 bullet points maximum
+        - For publication sections: typically just 1 entry 
+        - When selecting bullet points, prioritize those that:
+          * Demonstrate quantifiable achievements and results
+          * Showcase relevant skills for the target position
+          * Highlight leadership, initiative, and impact
+          * Use strong action verbs
+        - Preserve the original wording of selected bullet points
+        - If a bullet point is too long, keep it intact rather than editing it
+        
+        Return ONLY the complete LaTeX code with no additional explanations or markdown.
+        

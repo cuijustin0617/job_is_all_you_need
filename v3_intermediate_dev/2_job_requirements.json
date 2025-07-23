@@ -1,0 +1,42 @@
+{
+  "skills": [
+    "Java",
+    "JavaScript",
+    "Node.js",
+    "Python",
+    "Pandas",
+    "NumPy",
+    "ElasticSearch",
+    "RESTful APIs",
+    "AWS services",
+    "Unit and integration testing",
+    "Machine learning libraries"
+  ],
+  "experience": [
+    "Developing APIs, services, and user interfaces",
+    "Building RAG based solutions using LLMs",
+    "Implementing RESTful APIs",
+    "Troubleshooting and debugging applications"
+  ],
+  "knowledge": [
+    "Machine learning fundamentals",
+    "NLP concepts (GPT, BERT, etc.)",
+    "Large language models",
+    "Retrieval-augmented generation",
+    "Software development best practices (design patterns, testing, automation)",
+    "Security and data protection standards"
+  ],
+  "responsibilities": [
+    "Design, build, train, and publish machine learning models",
+    "Developing retrieval-augmented generation (RAG) based LLM / AI Agent solutions",
+    "Design, develop, and scalable and secure APIs",
+    "Work with AWS services",
+    "Implement RESTful APIs",
+    "Write unit and integration tests",
+    "Troubleshoot and debug applications"
+  ],
+  "qualifications": [
+    "Current student studying in a Canadian University",
+    "Post-secondary education or program"
+  ]
+}

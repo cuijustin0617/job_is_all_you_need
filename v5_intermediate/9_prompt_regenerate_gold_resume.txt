@@ -1,0 +1,265 @@
+
+        You are an expert LaTeX resume editor. Your task is to modify the LaTeX code of a resume
+        based on formatting recommendations to make it fit perfectly on one page.
+        
+        # Parsed Resume(in case you need to reference original content, but you shouldnt be adding information from this unless the recommendations say so):
+        {'block_1': {'block_type': 'contact information', 'name': 'Justin Cui', 'location': 'Toronto, ON, CA', 'email': 'justin.cui@mail.utoronto.ca', 'phone': '+1 416 827 9628', 'linkedin': 'linkedin/Justin-Cui'}, 'block_2': {'block_type': 'education', 'institution': 'University of Toronto', 'degree': 'Bachelor of Applied Science', 'major': 'Machine Intelligence', 'duration': '09/2021 - 05/2026', 'gpa': '3.94/4.00', 'relevant_courses': ['Data Structures & Algorithms', 'Probability and Statistics', 'Reinforcement Learning', 'Digital and Computer Systems', 'Introduction to Machine Learning', 'Matrix Algebra and Optimization', 'Probabilistic Reasoning', 'Software and Neural Networks', 'Introduction to Databases']}, 'block_3': {'block_type': 'work experience', 'title': 'SWE/SDE/MLE/MLops Intern', 'company': 'Modiface', 'location': 'Toronto, CA', 'duration': 'May 2024 - Present', 'bullets': ['Engineered a robust data processing pipeline to augment a synthetic 3D-face dataset (25M images) using stable diffusion with Python and Shell scripting, achieving a 17% improvement in facepoints prediction accuracy.', 'Developed a seamless model conversion tool to translate in-house computer vision models from PyTorch to TensorFlow, ensuring consistent cross-platform integration, reducing latency by over 10%.', 'Optimized inference performance of generative AI models (including GANs and diffusion-based models) by integrating OpenVINO, reducing latency by over 40% and enhancing scalability.', 'Developed a Python-based fine-tuning pipeline integrating existing training conversation pairs and formatting scripts to enhance beuaty chatbot by replacing the in-context learning approach', 'Architected end-to-end fine-tuning pipeline for conversational AI systems, replacing in-context learning with supervised fine-tuning on 5k+ curated dialogue pairs', 'Refactored skin diagnosis repository using object-oriented design, consolidating recurring patterns into a unified sign registry and score normalization framework, enhancing code maintainability and consistency.', 'Finetuned Stable Diffusion LoRA models to improve task-specific GenAI performance, improving accuracy by 40%.', 'Refined eyeliner extraction through advanced k-means clustering and adaptive HSV thresholding techniques, boosting accuracy in distinguishing facial makeup regions and optimizing the overall inference pipeline.', "Spearheaded the redesign and development of an internal computer vision model profiling tool's metric panel using TypeScript. This dashboard provided real-time monitoring of key performance indicators such as FPS, memory usage, and track time, enhancing system observability and performance tuning."]}, 'block_4': {'block_type': 'work experience', 'title': 'SWE/SDE/MLE/Applied ML/ML Research intern', 'company': 'Data-Driven Decision Making Lab (UofT)', 'location': 'Toronto, CA', 'duration': 'April 2023 - September 2023', 'bullets': ['Designed and implemented a RAG-based chatbot system leveraging LLM APIs for dynamic natural language interactions and personalized responses.', 'Architected the application using object-oriented design patterns, creating a modular system with 10+ interchangeable components for different NLP workflows.', 'Developed core infrastructure in Python with 5+ API integrations, implementing rate limiting and caching mechanisms to handle 500+ RPM.', 'Built a custom data pipeline using FAISS vector database to process and embed 1M+ product entries for real-time retrieval.', 'Conducted comprehensive system testing including unit tests (95% coverage) and integration tests with simulated synthetic users using LLMs.', 'Delivered technical demonstrations to 20+ Meta engineers and executives, showcasing system architecture and RAG features.', 'Authored detailed documentation including API specs, deployment guides, and maintenance procedures.', 'Retrieval-Augmented Conversational Recommendation System (SIGIR 2024, 1st Author): Developed an open source RAG-based conversational recommendation system powered by GPT-4.', 'Implemented two-tower dense retrieval with FAISS indexing 5M+ item embeddings for real-time similarity search.', 'Designed system architecture using OOP principles in Python, integrating LLM orchestration.', 'Published work at SIGIR 2024 and demoed the system to Meta’s engineering leadership.', 'Query Reformulation for Query-Driven Recommendation (SIGIR 2025, Co-Author): Invented a query reformulation method that combines breadth expansion and depth elaboration.', 'Curated 3 domain-specific datasets (hotels, restaurants, travel) synthetically with LLMs and labeled query-document relevance.', 'Benchmarked against existing approaches, improving MAP@10, MAP@30 by over 10%.', 'Published findings at SIGIR 2025 with ablation studies on reformulation components.']}, 'block_5': {'block_type': 'work experience', 'title': 'Software Engineer Intern', 'company': 'Voith Hydro', 'location': 'Montreal, CA', 'duration': 'May 2022 - September 2022', 'bullets': ['Engineered a SharePoint infrastructure solution to centralize engineering resources, deployed to 200+ users across the engineering department', 'Automated material specification analysis by creating Python scripts (Pandas/NumPy) to process CSV datasets, generating standardized reports that reduced manual review time.', 'Conducted user research interviews with 15+ engineers to optimize UI/UX flow, resulting in 95% adoption rate within first deployment month']}, 'block_6': {'block_type': 'publication', 'title': 'Retrieval-Augmented Conversational Recommendation with Prompt-Based Semi-Structured Natural Language State Tracking', 'authorship': 'First-author', 'conference': 'ACM SIGIR', 'year': '2024'}, 'block_7': {'block_type': 'publication', 'title': 'Elaborative Subtopic Query Reformulation for Query-Driven Recommendation', 'authorship': 'Co-author', 'conference': 'ACM SIGIR', 'year': '2025 (under review)'}, 'block_8': {'block_type': 'project', 'title': 'Subjective Summarization with PCA + LLM', 'description': 'Developed a novel approach to summarize opinion-based datasets using LDA + LLMs to identify key topics and opposing viewpoints. Produced structured summaries that capture stance distributions and core arguments while maintaining interpretability.'}, 'block_9': {'block_type': 'project', 'title': 'Geometric Approach to Query Performance Prediction', 'description': 'Explored a geometric approach to predicting query performance in information retrieval by analyzing embedding vector properties in high-dimensional space. Leveraged volume characteristics and spatial relationships to guide query reformulation and improve search effectiveness.'}, 'block_10': {'block_type': 'project', 'title': 'LLM Powered Resume Modifier for Job Descriptions', 'description': "Engineered a multi-agent system using Google's Gemini AI to tailor LaTeX resumes. The system parses resumes, condenses job descriptions, and employs relevance scoring and content selection to optimize work experiences and extras. Integrated a VLM feedback loop for formatting refinement and visual consistency."}, 'block_11': {'block_type': 'awards', 'list': ['The Wallberg Undergraduate Scholarships x2 (2022, 2024) -- Awarded to undergraduates with highest averages.', 'Undergraduate Student Research Awards (2023) -- NSERC Canada.', 'Fujino/Smith Emergence Scholarships (2022) -- Awarded to first-year undergraduates with highest averages.']}, 'block_12': {'block_type': 'skills', 'Programming': ['Python', 'C', 'MATLAB', 'PyTorch', 'TensorFlow', 'Keras', 'scikit-learn', 'Hugging Face Transformers', 'NumPy', 'Pandas', 'Matplotlib', 'Seaborn', 'OOP', 'Bash/Linux', 'Git', 'Docker', 'CI/CD', 'ML Ops', 'GCP', 'ONNX', 'OpenCV', 'Postgres', 'mySQL'], 'Languages': ['English (Native/Bilingual Proficiency)', 'Mandarin (Native/Bilingual Proficiency)', 'German (Limited Work Proficiency)']}, 'total_blocks': 12}
+        
+        # FORMATTING RECOMMENDATIONS:
+        Based on the analysis, the resume is currently too long (2 pages) and needs to be condensed to a single page. Following the instructions and context:
+
+Here are 3 specific changes to make the resume fit exactly on one page while maintaining a professional appearance:
+
+1.  **Remove the "Projects" section:** As identified in the context, `block_9` is the least important block included. The "Projects" section is typically the most suitable candidate for removal when space is limited, after core sections like Education and Experience. Removing this entire section will free up significant space.
+2.  **Reduce margins:** Slightly decrease the top/bottom and left/right margins (e.g., from 1 inch or 0.75 inches to 0.5 inches). This is a common and effective way to gain space without significantly altering the appearance.
+3.  **Slightly reduce font size:** Reduce the main body font size by a small increment (e.g., from 11pt to 10.5pt, or 10.5pt to 10pt if needed). This small change can save several lines of space across the document, helping to fit remaining content after removing the Projects section and adjusting margins.
+        
+        # ORIGINAL LATEX CODE:
+        ```
+        \documentclass[11pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot,
+    top=0.5cm,
+    bottom=0.2cm,
+    left=1.6cm,
+    right=1.6cm,
+    footskip=1.0cm,
+]{geometry}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{primaryColor}{RGB}{0, 0, 0}
+\definecolor{royalblue}{RGB}{65, 65, 185}
+\usepackage{enumitem}
+\usepackage{fontawesome5}
+\usepackage{amsmath}
+\usepackage[
+    pdftitle={Justin Cui Resume},
+    pdfauthor={Justin Cui},
+    pdfcreator={LaTeX},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref}
+\usepackage{eso-pic}
+\usepackage{calc}
+\usepackage{bookmark}
+\usepackage{lastpage}
+\usepackage{changepage}
+\usepackage{paracol}
+\usepackage{ifthen}
+\usepackage{needspace}
+\usepackage{iftex}
+
+% Ensure that generated PDF is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{palatino}
+\fi
+
+% Some settings:
+\justifying
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\columnsep}{0.15cm}
+\pagenumbering{gobble}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    0pt
+}{
+    0.25 cm
+}{
+    0.15 cm
+}
+
+\renewcommand\labelitemi{\textendash}
+
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.08 cm,
+        parsep=0.08 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 17pt
+    ]
+}
+{
+    \end{itemize}
+}
+\newenvironment{highlights2}{
+    \begin{itemize}[
+        topsep=0.08 cm,
+        parsep=0.08 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 10pt
+    ]
+}
+{
+    \end{itemize}
+}
+
+\newenvironment{subhighlights}{
+    \begin{itemize}[
+        topsep=0pt,
+        parsep=0.05 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.2 cm + 5pt
+    ]
+}{
+    \end{itemize}
+}
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+}
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+}
+
+\newcommand{\contactinfo}{
+    \centering
+    {\fontsize{25pt}{25pt}\selectfont Justin Cui} \\[4pt]
+    \vspace{0.3cm}
+    \small Toronto, ON, CA \hfill
+    \href{mailto:justin.cui@mail.utoronto.ca}{justin.cui@mail.utoronto.ca} \hfill
+    \href{tel:+1-416-827-9628}{+1 416 827 9628} \hfill
+    \href{https://linkedin.com/in/Justin-Cui}{linkedin.com/in/Justin-Cui} \\
+}
+
+\begin{document}
+
+\contactinfo
+\vspace{2pt}
+
+\section{Education}
+\vspace{0.08 cm}
+\begin{twocolentry}{09/2021 - 05/2026}
+    {\textbf{University of Toronto}}, Bachelor of Applied Science
+\end{twocolentry}
+\vspace{0.11cm}
+\begin{onecolentry}
+\hspace{0.3cm}\textbf{Machine Intelligence},  cGPA: {\textbf{3.94}}/4.00
+\vspace{0.07cm}
+    \begin{highlights}
+        \item Relevant Courses: Data Structures \& Algorithms, Probability and Statistics, Reinforcement Learning, Digital and Computer Systems, Introduction to Machine Learning, Matrix Algebra and Optimization, Probabilistic Reasoning, Software and Neural Networks, Introduction to Databases.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Publications}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+    \item \textbf{Retrieval-Augmented Conversational Recommendation with Prompt-Based Semi-Structured Natural Language State Tracking} \\
+    First-author, \textit{ACM SIGIR}, 2024.
+    \vspace{0.1cm}
+    \item \textbf{Elaborative Subtopic Query Reformulation for Query-Driven Recommendation} \\
+    Co-author, \textit{ACM SIGIR}, 2025 (under review).
+    \end{highlights}
+\end{onecolentry}
+
+\section{Experience}
+\vspace{0.08 cm}
+\begin{twocolentry}{May 2024 - Present}
+    {\textbf{SWE/SDE/MLE/MLops Intern}}, Modiface -- Toronto, CA
+\end{twocolentry}
+\vspace{0.05 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Engineered a robust data processing pipeline to augment a synthetic 3D-face dataset (25M images) using stable diffusion with Python and Shell scripting, achieving a 17\% improvement in facepoints prediction accuracy.
+        \item Developed a seamless model conversion tool to translate in-house computer vision models from PyTorch to TensorFlow, ensuring consistent cross-platform integration, reducing latency by over 10\%.
+        \item Optimized inference performance of generative AI models (including GANs and diffusion-based models) by integrating OpenVINO, reducing latency by over 40\% and enhancing scalability.
+        \item Architected end-to-end fine-tuning pipeline for conversational AI systems, replacing in-context learning with supervised fine-tuning on 5k+ curated dialogue pairs.
+        \item Refactored skin diagnosis repository using object-oriented design, consolidating recurring patterns into a unified sign registry and score normalization framework, enhancing code maintainability and consistency.
+        \item Finetuned Stable Diffusion LoRA models to improve task-specific GenAI performance, improving accuracy by 40\%.
+        \item Refined eyeliner extraction through advanced k-means clustering and adaptive HSV thresholding techniques, boosting accuracy in distinguishing facial makeup regions and optimizing the overall inference pipeline.
+    \end{highlights}
+\end{onecolentry}
+\vspace{0.35 cm}
+
+\begin{twocolentry}{April 2023 - September 2023}
+    {\textbf{SWE/SDE/MLE/Applied ML/ML Research intern}}, Data-Driven Decision Making Lab (UofT) -- Toronto, CA
+\end{twocolentry}
+\vspace{0.1cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Designed and implemented a RAG-based chatbot system leveraging LLM APIs for dynamic natural language interactions and personalized responses.
+        \item Architected the application using object-oriented design patterns, creating a modular system with 10+ interchangeable components for different NLP workflows.
+        \item Developed core infrastructure in Python with 5+ API integrations, implementing rate limiting and caching mechanisms to handle 500+ RPM.
+        \item Built a custom data pipeline using FAISS vector database to process and embed 1M+ product entries for real-time retrieval.
+        \item Conducted comprehensive system testing including unit tests (95\% coverage) and integration tests with simulated synthetic users using LLMs.
+        \item Delivered technical demonstrations to 20+ Meta engineers and executives, showcasing system architecture and RAG features.
+    \end{highlights}
+\end{onecolentry}
+\vspace{0.35 cm}
+
+\begin{twocolentry}{May 2022 - September 2022}
+    {\textbf{Software Engineer Intern}}, Voith Hydro -- Montreal, CA
+\end{twocolentry}
+\vspace{0.1cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Engineered a SharePoint infrastructure solution to centralize engineering resources, deployed to 200+ users across the engineering department.
+        \item Automated material specification analysis by creating Python scripts (Pandas/NumPy) to process CSV datasets, generating standardized reports that reduced manual review time.
+        \item Conducted user research interviews with 15+ engineers to optimize UI/UX flow, resulting in 95\% adoption rate within first deployment month.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Projects}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+    \item \textbf{Subjective Summarization with PCA + LLM} \\
+    Developed a novel approach to summarize opinion-based datasets using LDA + LLMs to identify key topics and opposing viewpoints. Produced structured summaries that capture stance distributions and core arguments while maintaining interpretability.
+    \vspace{0.1cm}
+    \item \textbf{Geometric Approach to Query Performance Prediction} \\
+    Explored a geometric approach to predicting query performance in information retrieval by analyzing embedding vector properties in high-dimensional space. Leveraged volume characteristics and spatial relationships to guide query reformulation and improve search effectiveness.
+    \end{highlights}
+\end{onecolentry}
+
+\section{Skills}
+\vspace{0.08 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item \textbf{Programming:} Python, C, MATLAB, PyTorch, TensorFlow, Keras, scikit-learn, Hugging Face Transformers, NumPy, Pandas, Matplotlib, Seaborn, OOP, Bash/Linux, Git, Docker, CI/CD, ML Ops, GCP, ONNX, OpenCV, Postgres, mySQL
+        \item \textbf{Languages:} English (Native/Bilingual Proficiency), Mandarin (Native/Bilingual Proficiency), German (Limited Work Proficiency)
+    \end{highlights}
+\end{onecolentry}
+
+\end{document}
+        ```
+        
+        # INSTRUCTIONS:
+        1. Apply all the formatting recommendations to the LaTeX code.
+        2. Focus on making the resume fit exactly on one page.
+        3. DO NOT add any new content or information unless explicitly mentioned in the recommendations.
+        4. DO NOT change the actual content information in the bullet points unless explicitly mentioned in the recommendations.
+        5. Preserve the overall structure and style of the original LaTeX code unless the recommendations say otherwise.
+        
+        Return ONLY the modified LaTeX code without any explanations or markers.
+        

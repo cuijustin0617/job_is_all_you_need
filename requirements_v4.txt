@@ -1,0 +1,6 @@
+google-genai
+PyPDF2
+pdf2image
+Pillow
+python-dotenv 
+poppler

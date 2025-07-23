@@ -61,7 +61,7 @@ class BlockRanker:
             job_requirements (dict): Job requirements from JobCondenser
             
         Returns:
-            dict: Dictionary with "must_include" and "ranked_list" keys
+            dict: Dictionary with "must_include" and "ranked_list" keys and prompt used
         """
         prompt = self._create_ranking_prompt(filtered_blocks, job_requirements)
         
@@ -71,6 +71,8 @@ class BlockRanker:
         
         # Extract the structured output
         result = self._parse_ranking_response(response.text)
+        # Add the prompt to the result
+        result["prompt"] = prompt
         return result
     
     def _create_ranking_prompt(self, filtered_blocks, job_requirements):
@@ -155,7 +157,7 @@ class BlockRanker:
             parsed_resume (dict): The parsed resume from ResumeParser
             
         Returns:
-            dict: Enhanced ranking with threshold information
+            dict: Enhanced ranking with threshold information and prompt used
         """
         # Enhance ranked list with descriptive information
         enhanced_ranked_list = []
@@ -191,7 +193,7 @@ class BlockRanker:
             if block_data["block_type"].lower() == "experience":
                 description = f"Experience: {block_data.get('company', '')} - {block_data.get('title', '')}"
             elif block_data["block_type"].lower() == "project":
-                description = f"Project: {block_data.get('name', '')}"
+                description = f"Project: {block_data.get('title', '')}"
             elif block_data["block_type"].lower() == "publication":
                 description = f"Publication: {block_data.get('title', '')}"
             else:
@@ -248,30 +250,7 @@ class BlockRanker:
         enhanced_result = ranking_result.copy()
         enhanced_result["threshold"] = threshold
         enhanced_result["enhanced_ranked_list"] = enhanced_ranked_list
+        enhanced_result["threshold_prompt"] = prompt
         
         return enhanced_result
 
-if __name__ == "__main__":
-    api_key = "AIzaSyD3fnGbKojcbSYiD2eKJQvum0oF4N5iWlA"
-    
-    # Example test
-    from ResumeParser import LLMResumeParser
-    from JobCondenser import JobCondenser
-    
-    # Parse resume
-    parser = LLMResumeParser(api_key=api_key)
-    with open("master_resume.txt", "r") as file:
-        latex_content = file.read()
-    parsed_resume = parser.parse_latex(latex_content)
-    print(json.dumps(parsed_resume, indent=2))
-    # Condense job
-    job_condenser = JobCondenser(api_key=api_key)
-    with open("llm+rag.txt", "r") as file:
-        job_description = file.read()
-    job_requirements = job_condenser.condense(job_description)
-    
-    # Rank blocks
-    block_ranker = BlockRanker(api_key=api_key)
-    ranking_result = block_ranker.rank_resume_blocks(parsed_resume, job_requirements)
-    
-    print(json.dumps(ranking_result, indent=2))

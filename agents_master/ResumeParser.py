@@ -20,7 +20,9 @@ class LLMResumeParser:
         )
         print("response generated")
         # Extract JSON from response
-        return self._extract_json_from_response(response.text)
+        parsed_resume = self._extract_json_from_response(response.text)
+        # Return both the parsed resume and the prompt used
+        return {"result": parsed_resume, "prompt": prompt}
     
     def _create_parsing_prompt(self, latex_content):
         """Create a detailed prompt to extract resume information into sequential blocks"""
@@ -87,26 +89,26 @@ class LLMResumeParser:
             "block_6": {{
                 "block_type": "project",
                 "title": "Project Title",
-                ... own structure that matches the original first project entry
+                ... own structure that matches the rest of the information in the original first project entry
             }},
             "block_7": {{
                 "block_type": "project",
                 "title": "Project Title",
-                ... own structure that matches the original second project entry
+                ... own structure that matches the rest of the information in the original second project entry
             }},
             "block_8": {{
                 "block_type": "publication",
                 "title": "Publication Title",
-                ... own structure that matches the original first publication entry
+                ... own structure that matches the rest of the information in the original first publication entry
             }},
             "block_9": {{
                 "block_type": "publication",
                 "title": "Publication Title",
-                ... own structure that matches the original second publication entry
+                ... own structure that matches the rest of the information in the original second publication entry
             }},
             "block_10": {{
                 "block_type": "professional summary",
-                ... own structure that matches the original professional summary entry
+                ... own structure that matches the information in the original professional summary entry
             }},
             "total_blocks": "number of blocks in the resume"
         }}

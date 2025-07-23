@@ -1,0 +1,61 @@
+{
+  "skills": [
+    "Machine learning",
+    "NLP",
+    "Software development",
+    "API development",
+    "Service development",
+    "User interface development",
+    "Node.js",
+    "Java",
+    "AWS services",
+    "Python",
+    "RESTful APIs",
+    "Service integration",
+    "Unit testing",
+    "Integration testing",
+    "Pandas",
+    "NumPy",
+    "ElasticSearch",
+    "JavaScript (plus)"
+  ],
+  "knowledge": [
+    "Machine Learning fundamentals",
+    "NLP concepts",
+    "Language model architectures (GPT, BERT)",
+    "LLMs concepts",
+    "RAG concepts",
+    "Fine-tuning models",
+    "Embeddings for information retrieval",
+    "Software development best practices",
+    "Design patterns",
+    "Testing principles",
+    "Automation principles",
+    "Security standards",
+    "Data protection standards"
+  ],
+  "responsibilities": [
+    "Build ML models",
+    "Build LLM models",
+    "Design, build, develop, publish, and maintain APIs, services, and user interfaces",
+    "Design, build, train, publish, and maintain machine learning models",
+    "Experiment with different models",
+    "Build RAG based solutions using LLMs",
+    "Collaborate on developing RAG based LLM / AI Agent solutions",
+    "Design and develop scalable and secure APIs",
+    "Work with AWS services",
+    "Implement RESTful APIs",
+    "Handle integrations between services / ML inference APIs",
+    "Write unit and integration tests",
+    "Ensure compliance with security and data protection standards",
+    "Collaborate with the product team",
+    "Troubleshoot and debug applications"
+  ],
+  "qualifications": [
+    "Currently pursuing a post-secondary degree or program",
+    "Student at a Canadian University",
+    "Proficiency in Java or JavaScript",
+    "Exposure to ML libraries (with Java or JavaScript proficiency)",
+    "Familiarity with basic JavaScript knowledge (plus)"
+  ]
+}
